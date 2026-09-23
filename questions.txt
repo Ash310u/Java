@@ -1,0 +1,9 @@
+1. Design an abstract class Shape having 2 methods calculateArea() and display(). Create Rectangle and Triangle classes by inheriting the Shape class and override above methods to suitably implement for Rectangle and Triangle class.
+2. Write a program to use super keyword:
+a. For invoking super class constructor
+b. For invoking super class member
+3. Write a Java program to create a super class Vehicle having members, company name and price. Derive two different classes LightMotorVehicle (members – mileage) and HeavyMotorVehicle (members – capacity-in-tons). Accept the information for n vehicles and display the information in appropriate form. While taking data, ask the user about the type of vehicle first. Each vehicle should have a unique number starting from 100001. This number should be generated at the time of instantiation.
+
+4. Create an interface called Player. The interface has an abstract method called play() that displays a message describing the meaning of “play” to the class. Create classes called Child, Musician, and Actor that all implement Player.
+5. Write a Java program where the interface ‘vegetable’ declares two functions. The functions color () is used for finding the colour of the vegetables and whgrow () for finding where the vegetable grow: underground or above ground. The interface vegetable is implanted, for example, by four different classes: spinach, potato, onion and tomato. Each class provides the implementation of both the functions.
+6. Write a program to implement multiple inheritance in Java using interface

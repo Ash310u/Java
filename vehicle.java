@@ -1,79 +1,67 @@
-import java.util.*;
-
-abstract class Vehicle {
-    private static int nextNumber = 100001;
-    protected int vehicleNumber;
+class Vehicle {
+    protected static long nextNumber = 100001;
+    protected long uniqueNumber;
     protected String companyName;
     protected double price;
 
-    Vehicle(String c, double p) {
-        this.companyName = c;
-        this.price = p;
-        this.vehicleNumber = nextNumber++;
+    public Vehicle(String companyName, double price) {
+        this.uniqueNumber = nextNumber++;
+        this.companyName = companyName;
+        this.price = price;
     }
 
-    abstract void display();
+    public void display() {
+        System.out.println("Vehicle Number: " + uniqueNumber);
+        System.out.println("Company Name: " + companyName);
+        System.out.println("Price: " + price);
+    }
 }
 
 class LightMotorVehicle extends Vehicle {
     private double mileage;
 
-    LightMotorVehicle(String c, double p, double m) { 
-        super(c, p); 
-        this.mileage = m; 
+    public LightMotorVehicle(String companyName, double price, double mileage) {
+        super(companyName, price);
+        this.mileage = mileage;
     }
 
     @Override
-    void display() {
-        System.out.printf("No: %d | Light | %s | %.2f | %.2f km/l%n", vehicleNumber, companyName, price, mileage);
+    public void display() {
+        System.out.println("--- Light Motor Vehicle ---");
+        super.display();
+        System.out.println("Mileage: " + mileage + " km/l");
+        System.out.println();
     }
 }
 
 class HeavyMotorVehicle extends Vehicle {
-    private double capacity;
+    private double capacityInTons;
 
-    HeavyMotorVehicle(String c, double p, double cap) { 
-        super(c, p); 
-        this.capacity = cap; 
+    public HeavyMotorVehicle(String companyName, double price, double capacityInTons) {
+        super(companyName, price);
+        this.capacityInTons = capacityInTons;
     }
 
     @Override
-    void display() {
-        System.out.printf("No: %d | Heavy | %s | %.2f | %.2f tons%n", vehicleNumber, companyName, price, capacity);
+    public void display() {
+        System.out.println("--- Heavy Motor Vehicle ---");
+        super.display();
+        System.out.println("Capacity: " + capacityInTons + " tons");
+        System.out.println();
     }
 }
 
-public class VehicleApp {
+public class vehicle {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n;
-        try {
-            n = Integer.parseInt(sc.nextLine().trim());
-        } catch (Exception e) {
-            System.out.println("Invalid number of vehicles.");
-            sc.close();
-            return;
+        Vehicle[] vehicles = new Vehicle[3];
+
+        vehicles[0] = new LightMotorVehicle("Honda", 700000, 22.5);
+        vehicles[1] = new HeavyMotorVehicle("Tata", 3500000, 10.5);
+        vehicles[2] = new LightMotorVehicle("Suzuki", 550000, 18.0);
+
+        System.out.println("Vehicle Information:\n");
+        for (Vehicle v : vehicles) {
+            v.display();
         }
-        Vehicle[] v = new Vehicle[n];
-        for (int i = 0; i < n; ) {
-            try {
-                int t = Integer.parseInt(sc.nextLine().trim());
-                String c = sc.nextLine().trim();
-                double p = Double.parseDouble(sc.nextLine().trim());
-                if (t == 1) {
-                    double m = Double.parseDouble(sc.nextLine().trim());
-                    v[i++] = new LightMotorVehicle(c, p, m);
-                } else if (t == 2) {
-                    double cap = Double.parseDouble(sc.nextLine().trim());
-                    v[i++] = new HeavyMotorVehicle(c, p, cap);
-                } else {
-                    System.out.println("Invalid vehicle type. Must be 1 (Light) or 2 (Heavy).");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input. Please enter data in correct format.");
-            }
-        }
-        for (Vehicle ve : v) ve.display();
-        sc.close();
     }
 }
